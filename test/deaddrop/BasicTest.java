@@ -12,18 +12,11 @@ public class BasicTest {
 
         Basic encoder = new Basic(new String[]{"banner.png"});
         encoder.encode_data(message.getBytes());
-        encoder.save_images();
+        encoder.save_images("/tmp");
 
-        Basic decoder = new Basic(new String[]{"processed/banner.png"});
+        Basic decoder = new Basic(new String[]{"/tmp/banner.png"});
         String encryptedData = new String(decoder.decode_data());
         assertThat(encryptedData, is(message));
-        System.out.println(encryptedData);
-    }
-
-    @Test
-    public void should_decrypt_message() {
-        Basic decoder = new Basic(new String[]{"processed/null.png"});
-        String encryptedData = new String(decoder.decode_data());
         System.out.println(encryptedData);
     }
 }
