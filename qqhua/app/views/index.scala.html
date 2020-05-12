@@ -1,0 +1,34 @@
+@()
+
+@main("QQ Hua") {
+<h1>选择图片文件，输入想加密的文本</h1>
+@helper.form(action = routes.EncryptController.upload, Symbol("enctype") -> "multipart/form-data") {
+
+<p>
+    <input type="file" name="picture">
+</p>
+
+<p>
+    <textarea name="message"></textarea>
+</p>
+
+<p>
+    <input type="submit">
+</p>
+
+}
+
+<h1>选择已加密的图片文件</h1>
+@helper.form(action = routes.DecryptController.upload, Symbol("enctype") -> "multipart/form-data") {
+
+<p>
+    <input type="file" name="picture">
+</p>
+
+<p>
+    <input type="submit">
+</p>
+
+}
+}
+
