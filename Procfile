@@ -1,1 +1,1 @@
-web: sbt run
+web: target/universal/stage/bin/qqhua
