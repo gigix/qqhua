@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/qqhua
+web: target/universal/stage/bin/qqhua -Dhttp.port=$PORT $PLAY_OPTS
