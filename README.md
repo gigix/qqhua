@@ -11,3 +11,11 @@
 * *第三阶段*：对文本信息的大数据分析和利用
 
 * *第四阶段*：收费模式
+
+# 开始开发
+
+（TODO）
+
+# 持续集成
+
+![Scala CI](https://github.com/gigix/qqhua/workflows/Scala%20CI/badge.svg)
