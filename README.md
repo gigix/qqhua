@@ -14,7 +14,7 @@
 
 # 开始开发
 
-* 安装`sbt`
+* 安装`sbt`：https://www.scala-sbt.org/release/docs/Setup.html
 
 * `sbt run`
 
