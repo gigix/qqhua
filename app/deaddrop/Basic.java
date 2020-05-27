@@ -1,8 +1,16 @@
 package deaddrop;
 
 import deaddrop.core.Image;
+import deaddrop.core.LSB;
 import deaddrop.core.Technique;
 import deaddrop.core.header;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class Basic extends Encoder {
     Image base_image;
@@ -20,6 +28,24 @@ public class Basic extends Encoder {
     public Basic(Image[] images, Technique tech) {
         super(images, tech);
         base_image = image_set[0];
+    }
+
+    public Basic(String imageFilePath) {
+        this(new String[]{imageFilePath});
+    }
+
+    public static byte[] encode(String imageFilePath, String message) throws IOException {
+        Basic encoder = new Basic(imageFilePath);
+        encoder.encode_data(message.getBytes());
+        BufferedImage bufferedImage = encoder.image_set[0].image;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "png", bos);
+        return bos.toByteArray();
+    }
+
+    public static String decode(Image encodedImage) {
+        Basic decoder = new Basic(new Image[]{encodedImage}, new LSB());
+        return new String(decoder.decode_data());
     }
 
     public byte[] get_header(int data_length) {
