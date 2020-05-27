@@ -9,6 +9,8 @@ import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 
 import static java.lang.String.format;
@@ -17,7 +19,7 @@ public class EncryptController extends Controller {
     @Inject
     FormFactory formFactory;
 
-    public Result upload(Http.Request request) {
+    public Result upload(Http.Request request) throws IOException {
         String message = formFactory.form().bindFromRequest(request).get("message");
 
         Http.MultipartFormData<Files.TemporaryFile> body = request.body().asMultipartFormData();
@@ -31,7 +33,11 @@ public class EncryptController extends Controller {
             encoder.encode_data(message.getBytes());
             encoder.save_images("public/processed");
 
-            return redirect("/assets/processed/null.png");
+            File encryptedImageFile = new File("public/processed/null.png");
+//            BufferedImage encryptedImage = ImageIO.read(encryptedImageFile);
+//            byte[] encryptedImageData = ((DataBufferByte) encryptedImage.getRaster().getDataBuffer()).getData();
+//
+            return ok(encryptedImageFile);
         } else {
             return badRequest().flashing("error", "Missing file");
         }
