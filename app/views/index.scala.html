@@ -2,23 +2,36 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css"
-          href="/assets/bootstrap/css/bootstrap.min.css">
+          href="/assets/stylesheets/bootstrap.css">
     <script src="/assets/javascripts/jquery-3.1.1.slim.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.bundle.js"></script>
 </head>
 
 <body>
 
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal">QQHua</h5>
-    <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#">收发信息</a>
-        <a class="p-2 text-dark" href="#">添加好友</a>
-        <a class="p-2 text-dark" href="#">消息历史</a>
-        <a class="p-2 text-dark" href="#">定价</a>
-    </nav>
-    <a class="btn btn-outline-primary" href="#">马上注册</a>
-</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">QQHua</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">收发信息<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">添加好友</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">消息历史</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">定价</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">QQHua</h1>
@@ -41,7 +54,7 @@
                 <div class="input-group mb-3">
                     <div class="custom-file">
                         <input type="file" name="picture" class="custom-file-input" id="encryptFileGroup">
-                        <label class="custom-file-label" for="encryptFileGroup">选择图片文件……</label>
+                        <label class="custom-file-label" for="encryptFileGroup">选择图片文件…</label>
                     </div>
                     <div class="input-group-append">
                         <input type="submit" class="input-group-text">
