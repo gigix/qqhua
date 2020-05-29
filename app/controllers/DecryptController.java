@@ -12,6 +12,10 @@ import java.nio.file.Paths;
 import static java.lang.String.format;
 
 public class DecryptController extends Controller {
+    public Result index() {
+        return ok(views.html.decrypt.render());
+    }
+
     public Result upload(Http.Request request) {
         Http.MultipartFormData<Files.TemporaryFile> body = request.body().asMultipartFormData();
         Http.MultipartFormData.FilePart<Files.TemporaryFile> picture = body.getFile("picture");

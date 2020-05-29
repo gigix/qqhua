@@ -25,6 +25,10 @@ public class EncryptController extends Controller {
     @Inject
     FormFactory formFactory;
 
+    public Result index() {
+        return ok(views.html.encrypt.render());
+    }
+
     public Result upload(Http.Request request) throws IOException {
         String message = formFactory.form().bindFromRequest(request).get("message");
 
