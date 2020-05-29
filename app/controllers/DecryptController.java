@@ -12,10 +12,6 @@ import java.nio.file.Paths;
 import static java.lang.String.format;
 
 public class DecryptController extends Controller {
-    public Result index() {
-        return ok(views.html.decrypt.render());
-    }
-
     public Result upload(Http.Request request) {
         Http.MultipartFormData<Files.TemporaryFile> body = request.body().asMultipartFormData();
         Http.MultipartFormData.FilePart<Files.TemporaryFile> picture = body.getFile("picture");
@@ -26,7 +22,7 @@ public class DecryptController extends Controller {
 
             Basic decoder = new Basic(new String[]{originalFilePath});
             String encryptedData = new String(decoder.decode_data());
-            return ok(encryptedData);
+            return ok(views.html.decrypt.render(encryptedData));
         } else {
             return badRequest().flashing("error", "Missing file");
         }
