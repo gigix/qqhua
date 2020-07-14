@@ -48,6 +48,7 @@ public class EncryptControllerTest {
     @Test
     public void should_render_template_to_show_encrypted_picture() throws Exception {
         mockMvc.perform(get("/encrypted"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(view().name("encrypted.html"));
     }
 }
