@@ -21,20 +21,24 @@ public class EncryptedPicture {
 
     public EncryptedPicture(String encryptedBase64) throws IOException {
         picture = getMimeDecoder().decode(encryptedBase64);
-        String originalFilePath = format("/tmp/%s.jpg", new DateTime());
-        new FileOutputStream(originalFilePath).write(picture);
+        String originalFilePath = writePictureToTempFile();
         Basic decoder = new Basic(new String[]{originalFilePath});
         message = new String(decoder.decode_data());
     }
 
     public String toBase64() throws IOException {
-        String originalFilePath = format("/tmp/%s.jpg", new DateTime());
-        new FileOutputStream(originalFilePath).write(picture);
+        String originalFilePath = writePictureToTempFile();
         byte[] encodedPictureContent = Basic.encode(originalFilePath, message);
         return getMimeEncoder().encodeToString(encodedPictureContent);
     }
 
     public String getMessage() {
         return message;
+    }
+
+    private String writePictureToTempFile() throws IOException {
+        String originalFilePath = format("/tmp/%s.jpg", new DateTime());
+        new FileOutputStream(originalFilePath).write(picture);
+        return originalFilePath;
     }
 }
