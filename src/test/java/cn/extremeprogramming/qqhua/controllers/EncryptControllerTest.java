@@ -47,8 +47,11 @@ public class EncryptControllerTest {
 
     @Test
     public void should_render_template_to_show_encrypted_picture() throws Exception {
-        mockMvc.perform(get("/encrypted"))
+        String expectedBase64Attr = "this_should_be_base_64";
+        mockMvc.perform(get("/encrypted")
+                .flashAttr("imageAsBase64", expectedBase64Attr))
                 .andExpect(status().isOk())
-                .andExpect(view().name("encrypted.html"));
+                .andExpect(view().name("encrypted.html"))
+                .andExpect(model().attribute("imageAsBase64", expectedBase64Attr));
     }
 }

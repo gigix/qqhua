@@ -14,19 +14,22 @@ import java.io.IOException;
 
 @Controller
 public class EncryptController {
+
+    public static final String ATTR_NAME_FOR_BASE64 = "imageAsBase64";
+
     @PostMapping("/encrypt")
     public String post(
             @RequestParam("message") String message,
             @RequestParam("picture") MultipartFile picture,
             RedirectAttributes attributes) throws IOException {
         EncryptedPicture encryptedPicture = new EncryptedPicture(picture.getBytes(), message);
-        attributes.addFlashAttribute("imageAsBase64", encryptedPicture.toBase64());
+        attributes.addFlashAttribute(ATTR_NAME_FOR_BASE64, encryptedPicture.toBase64());
         return "redirect:/encrypted";
     }
 
     @GetMapping("/encrypted")
-    public String get(@ModelAttribute("imageAsBase64") String imageAsBase64, Model model) {
-        model.addAttribute("imageAsBase64", imageAsBase64);
+    public String get(@ModelAttribute(ATTR_NAME_FOR_BASE64) String imageAsBase64, Model model) {
+        model.addAttribute(ATTR_NAME_FOR_BASE64, imageAsBase64);
         return "encrypted.html";
     }
 }
