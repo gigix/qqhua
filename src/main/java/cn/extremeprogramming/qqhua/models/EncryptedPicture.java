@@ -21,9 +21,12 @@ public class EncryptedPicture {
 
     public EncryptedPicture(String encryptedBase64) throws IOException {
         picture = getMimeDecoder().decode(encryptedBase64);
-        String originalFilePath = writePictureToTempFile();
-        Basic decoder = new Basic(new String[]{originalFilePath});
-        message = new String(decoder.decode_data());
+        message = decode();
+    }
+
+    public EncryptedPicture(byte[] encryptedPictureContent) throws IOException {
+        picture = encryptedPictureContent;
+        message = decode();
     }
 
     public String toBase64() throws IOException {
@@ -34,6 +37,12 @@ public class EncryptedPicture {
 
     public String getMessage() {
         return message;
+    }
+
+    private String decode() throws IOException {
+        String originalFilePath = writePictureToTempFile();
+        Basic decoder = new Basic(new String[]{originalFilePath});
+        return new String(decoder.decode_data());
     }
 
     private String writePictureToTempFile() throws IOException {

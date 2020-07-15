@@ -18,7 +18,7 @@ public class EncryptedPictureTest {
 
     @Test
     public void should_encrypt_message_into_given_file() throws IOException {
-        byte[] picture = loadTestPicture();
+        byte[] picture = loadTestPicture("banner.png");
         EncryptedPicture encryptedPicture = new EncryptedPicture(picture, MESSAGE);
         String base64 = encryptedPicture.toBase64();
 
@@ -41,8 +41,15 @@ public class EncryptedPictureTest {
     }
 
     @Test
+    public void should_create_encrypted_file_with_byte_array() throws IOException {
+        byte[] encryptedPictureContent = loadTestPicture("encrypted_picture.png");
+        EncryptedPicture encryptedPicture = new EncryptedPicture(encryptedPictureContent);
+        assertThat(encryptedPicture.getMessage(), is(MESSAGE));
+    }
+
+    @Test
     public void should_demonstrate_usage_in_both_directions() throws IOException {
-        byte[] picture = loadTestPicture();
+        byte[] picture = loadTestPicture("banner.png");
         EncryptedPicture encrypted = new EncryptedPicture(picture, MESSAGE);
         String base64 = encrypted.toBase64();
 
@@ -50,7 +57,7 @@ public class EncryptedPictureTest {
         assertThat(toBeDecrypted.getMessage(), is(MESSAGE));
     }
 
-    private byte[] loadTestPicture() throws IOException {
-        return requireNonNull(getClass().getClassLoader().getResourceAsStream("banner.png")).readAllBytes();
+    private byte[] loadTestPicture(String filename) throws IOException {
+        return requireNonNull(getClass().getClassLoader().getResourceAsStream(filename)).readAllBytes();
     }
 }
